@@ -1,4 +1,5 @@
 import React, { useState,type FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 
 // 1. Interfaces (Modelos de Dados)
 interface Skill {
@@ -45,19 +46,32 @@ export default function Portfolio() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // 4. Manipulação do Envio (Simulado)
-  const handleSubmit = async (e: FormEvent) => {
+  // 4. Manipulação do Envio
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsSending(true);
 
-    // NOTA: React roda no navegador. Você não pode usar SMTP direto aqui por segurança.
-    // Normalmente chamaria uma API ou usaria EmailJS. Aqui simulamos um delay de 1s.
-    setTimeout(() => {
-      console.log("Enviando dados:", formData);
-      setIsSending(false);
-      setShowModal(true);
-      setFormData({ name: '', email: '', message: '' });
-    }, 1500);
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+    
+    const serviceID = 'service_k0it0b9';
+    const templateID = 'template_h1yapie';
+    const userID = 'ZeGsKGfpPJPcIXEAM';
+
+    emailjs.send(serviceID, templateID, templateParams, userID)
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setIsSending(false);
+        setShowModal(true);
+        setFormData({ name: '', email: '', message: '' });
+      }, (err) => {
+        console.log('FAILED...', err);
+        setIsSending(false);
+        alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.');
+      });
   };
 
   return (
@@ -157,7 +171,7 @@ export default function Portfolio() {
 
           <div className="flex justify-end">
             <div className="w-full md:w-5/12 bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 text-left shadow-2xl">
-              <h4 className="text-white text-center font-bold mb-6">Entre em Contato</h4>
+              <h4 className="text-2xl text-white text-center font-bold mb-6">Entre em Contato</h4>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <input 
