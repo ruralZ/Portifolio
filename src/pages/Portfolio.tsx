@@ -1,79 +1,12 @@
-import React, { useState,type FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
+import { skills } from '../data/skills';
+import { projects } from '../data/projects';
+import { useContactForm } from '../hooks/useContactForm';
+import { SkillCard } from '../components/skillCard';
+import { ProjectCard } from '../components/projectCard';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-// 1. Interfaces (Modelos de Dados)
-interface Skill {
-  title: string;
-  description: string;
-  items: string[];
-}
-
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-}
-
-interface ContactFormState {
-  name: string;
-  email: string;
-  message: string;
-}
-
-// 2. Dados (Simulando o banco)
-const skillsList: Skill[] = [
-  { title: "Excel Avançado", description: "Domínio completo em fórmulas complexas.", items: ["Fórmulas Avançadas", "Tabelas Dinâmicas", "VBA e Macros"] },
-  { title: "Power BI", description: "Criação de dashboards interativos.", items: ["DAX", "Power Query", "Modelagem"] },
-  { title: "MySQL", description: "Design e gerenciamento de bancos.", items: ["Queries Otimizadas", "Administração", "Modelagem"] },
-  { title: "Automação Python", description: "Scripts de automação e scraping.", items: ["Web Scraping", "Pandas", "Scripts Admin"] }
-];
-
-const projectList: Project[] = [
-  { title: "Dashboard de Vendas", description: "Dashboard completo em Power BI com análise em tempo real.", tags: ["Power BI", "DAX", "Excel"] },
-  { title: "Automação de Relatórios", description: "Script Python que automatiza a leitura e envio de e-mails.", tags: ["Python", "Pandas", "Excel"] },
-  { title: "Banco de Dados CRM", description: "Design e implementação de banco relacional.", tags: ["MySQL", "SQL"] }
-];
-
 export default function Portfolio() {
-  // 3. Estado (Substitui as variáveis do @code)
-  const [formData, setFormData] = useState<ContactFormState>({ name: '', email: '', message: '' });
-  const [showModal, setShowModal] = useState(false);
-  const [isSending, setIsSending] = useState(false);
-
-  // Lógica de atualização do formulário
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  // 4. Manipulação do Envio
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsSending(true);
-
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
-    };
-    
-    const serviceID = 'service_k0it0b9';
-    const templateID = 'template_h1yapie';
-    const userID = 'ZeGsKGfpPJPcIXEAM';
-
-    emailjs.send(serviceID, templateID, templateParams, userID)
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setIsSending(false);
-        setShowModal(true);
-        setFormData({ name: '', email: '', message: '' });
-      }, (err) => {
-        console.log('FAILED...', err);
-        setIsSending(false);
-        alert('Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.');
-      });
-  };
+  const { formData, handleChange, handleSubmit, showModal, setShowModal, isSending } = useContactForm();
 
   return (
     <div className="font-sans bg-gray-50 text-gray-800">
@@ -122,21 +55,8 @@ export default function Portfolio() {
           <p className="text-gray-500">Ferramentas e tecnologias que domino</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillsList.map((skill, index) => (
-            <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-transparent hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
-              {/* Slide effect no footer do card */}
-              <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-purple-600 to-blue-500 transition-all duration-300 group-hover:w-full"></div>
-              
-              <h4 className="font-bold text-xl text-purple-600 mb-2">{skill.title}</h4>
-              <p className="text-sm text-gray-500 mb-4">{skill.description}</p>
-              <ul className="space-y-2">
-                {skill.items.map((item, idx) => (
-                  <li key={idx} className="text-sm flex items-center gap-2">
-                    <span className="text-green-500">✔</span> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {skills.map((skill) => (
+            <SkillCard key={skill.title} skill={skill} />
           ))}
         </div>
       </section>
@@ -146,19 +66,8 @@ export default function Portfolio() {
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-16">Projetos Destacados</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {projectList.map((project, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 relative">
-                 <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-purple-600 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                <h5 className="font-bold text-lg mb-2">{project.title}</h5>
-                <p className="text-sm text-gray-500 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full text-xs font-semibold">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
             ))}
           </div>
         </div>
