@@ -1,5 +1,6 @@
 import React, { useState,type FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 // 1. Interfaces (Modelos de Dados)
 interface Skill {
@@ -165,45 +166,70 @@ export default function Portfolio() {
 
       {/* Contact Section (Glassmorphism) */}
       <section id="contato" className="py-20 bg-gradient-to-br from-[#737DF2] to-[#8E54E9]">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-white mb-2">Vamos Conversar?</h2>
-          <p className="text-white/80 mb-12">Estou disponível para novos projetos e oportunidades.</p>
-
-          <div className="flex justify-end">
-            <div className="w-full md:w-5/12 bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 text-left shadow-2xl">
-              <h4 className="text-2xl text-white text-center font-bold mb-6">Entre em Contato</h4>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <input 
-                    type="text" name="name" required placeholder="Seu Nome" 
-                    value={formData.name} onChange={handleChange}
-                    className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
-                  />
-                </div>
-                <div>
-                  <input 
-                    type="email" name="email" required placeholder="Seu Email" 
-                    value={formData.email} onChange={handleChange}
-                    className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
-                  />
-                </div>
-                <div>
-                  <textarea 
-                    name="message" required rows={4} placeholder="Sua Mensagem" 
-                    value={formData.message} onChange={handleChange}
-                    className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
-                  ></textarea>
-                </div>
-                <button type="submit" disabled={isSending} className="w-full bg-white text-purple-600 font-bold py-3 rounded-full hover:bg-gray-100 transition disabled:opacity-70">
-                  {isSending ? 'Enviando...' : 'Enviar Mensagem'}
-                </button>
-              </form>
+        <div className="container mx-auto px-6">       
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Agrupamos tudo isso numa div só para o Grid entender que isso é UMA coisa */}
+            <div className="text-white text-center md:text-left">
+              
+              <h2 className="text-gray-800 text-4xl font-bold mb-4">Vamos Conversar?</h2>
+              <p className="text-lg opacity-80 mb-8">
+                Estou disponível para novos projetos e oportunidades.
+              </p>
+              {/* Div dos Links (Github/Linkedin) */}
+              <div className="flex flex-col gap-4 items-center md:items-start">
+                
+                <a href="https://github.com/ruralZ" target="_blank" rel="noopener noreferrer" 
+                  className="flex items-center gap-3 text-2xl font-bold hover:text-yellow-300 transition-colors duration-300">
+                  <FaGithub className="text-3xl"/> 
+                  <span>Github</span>
+                </a>
+                <a href="https://www.linkedin.com/in/pedrozhenrique" target="_blank" rel="noopener noreferrer" 
+                  className="flex items-center gap-3 text-2xl font-bold hover:text-yellow-300 transition-colors duration-300">
+                  <FaLinkedin className="text-3xl"/> 
+                  <span>Linkedin</span>
+                </a>
+              </div>
             </div>
-          </div>
-          
-          <footer className="mt-20 pt-8 border-t border-white/20 text-white/60 text-sm">
+            <div className="flex justify-center md:justify-end">
+              {/* max-w-md = Garante que o formulário não fique esticado demais */}
+              <div className="w-full max-w-md bg-white/15 backdrop-blur-lg border border-white/30 rounded-3xl p-8 shadow-2xl">
+                <h4 className="text-2xl text-white text-center font-bold mb-6">Entre em Contato</h4>
+        
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <input 
+                      type="text" name="name" required placeholder="Seu Nome" 
+                      value={formData.name} onChange={handleChange}
+                      className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
+                    />
+                  </div>
+                  <div>
+                    <input 
+                      type="email" name="email" required placeholder="Seu Email" 
+                      value={formData.email} onChange={handleChange}
+                      className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
+                    />
+                  </div>
+                  <div>
+                    <textarea 
+                      name="message" required rows={4} placeholder="Sua Mensagem" 
+                      value={formData.message} onChange={handleChange}
+                      className="w-full bg-white/10 border border-white/50 text-white placeholder-white/70 rounded-lg p-3 focus:outline-none focus:bg-white/20 transition"
+                    ></textarea>
+                  </div>
+                  <button type="submit" disabled={isSending} className="w-full bg-white text-purple-600 font-bold py-3 rounded-full hover:bg-gray-100 transition disabled:opacity-70">
+                    {isSending ? 'Enviando...' : 'Enviar Mensagem'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div> 
+          {/* Fim do Grid */}
+
+          <footer className="mt-20 pt-8 border-t border-white/20 text-white/60 text-sm text-center">
             © 2026 Pedro Henrique. Todos os direitos reservados.
           </footer>
+
         </div>
       </section>
 
