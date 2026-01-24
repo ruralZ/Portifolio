@@ -4,6 +4,5 @@ import type { Skill } from "../types";
 export const skills: Skill[] = [
     { title: "Excel Avançado", description: "Domínio completo em fórmulas complexas.", items: ["Fórmulas Avançadas", "Tabelas Dinâmicas", "VBA e Macros"] },
     { title: "Power BI", description: "Criação de dashboards interativos.", items: ["DAX", "Power Query", "Modelagem"] },
-    { title: "MySQL", description: "Design e gerenciamento de bancos.", items: ["Queries Otimizadas", "Administração", "Modelagem"] },
-    { title: "Automação Python", description: "Scripts de automação e scraping.", items: ["Web Scraping", "Pandas", "Scripts Admin"] }
+    { title: "MySQL", description: "Design e gerenciamento de bancos.", items: ["Queries Otimizadas", "Administração", "Modelagem"] }
 ];
