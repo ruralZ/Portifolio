@@ -10,9 +10,3 @@ export interface Project {
   description: string;
   tags: string[];
 }
-
-export interface ContactFormState {
-  name: string;
-  email: string;
-  message: string;
-}

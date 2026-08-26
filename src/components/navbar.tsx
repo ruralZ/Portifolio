@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 
 const navItens = ["Competências", "Projetos", "Contato"];
 const formatAnchor = (item: string) => {
