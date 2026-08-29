@@ -4,8 +4,14 @@ import { SkillCard } from "../components/skillCard";
 import { ProjectCard } from "../components/projectCard";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Navbar } from "../components/navbar";
+import { useState } from "react";
+import type { Project } from "../types";
 
 export default function Portfolio() {
+  const [filter, setFilter] = useState<"Todos" | Project["category"]>("Todos");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const visibleProjects = filter === "Todos" ? projects : projects.filter((project) => project.category === filter);
+
   return (
     <main>
       <div className="font-sans bg-gray-50 text-gray-800">
@@ -67,16 +73,55 @@ export default function Portfolio() {
         {/* Projects Section */}
         <section id="projetos" className="py-20 bg-gray-100">
           <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center mb-16">
-              Projetos Destacados
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {projects.map((project) => (
-                <ProjectCard key={project.title} project={project} />
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-purple-600">Portfólio real</p>
+              <h2 className="text-3xl font-bold text-gray-900">Projetos em destaque</h2>
+              <p className="mt-3 text-gray-600">Uma seleção de dashboards e planilhas desenvolvidos por mim. Clique em um projeto para explorar as telas.</p>
+            </div>
+            <div className="mb-10 flex flex-wrap justify-center gap-3" role="group" aria-label="Filtrar projetos">
+              {(["Todos", "Power BI", "Excel"] as const).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => setFilter(option)}
+                  className={`rounded-full px-5 py-2 text-sm font-bold transition ${filter === option ? "bg-purple-600 text-white shadow-md" : "bg-white text-gray-600 ring-1 ring-gray-200 hover:bg-purple-50"}`}
+                >
+                  {option}
+                </button>
               ))}
             </div>
+            <div className="grid gap-8 md:grid-cols-2">
+              {visibleProjects.map((project) => (
+                <ProjectCard key={project.title} project={project} onOpen={setSelectedProject} />
+              ))}
+            </div>
+            {visibleProjects.length === 0 && <p className="py-10 text-center text-gray-500">Nenhum projeto nessa categoria ainda.</p>}
           </div>
         </section>
+
+        {selectedProject && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/70 p-4" role="dialog" aria-modal="true" aria-labelledby="project-title" onMouseDown={() => setSelectedProject(null)}>
+            <div className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl" onMouseDown={(event) => event.stopPropagation()}>
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-purple-600">{selectedProject.category}</p>
+                  <h2 id="project-title" className="text-xl font-bold text-gray-900">{selectedProject.title}</h2>
+                </div>
+                <button type="button" onClick={() => setSelectedProject(null)} className="rounded-full px-4 py-2 font-bold text-gray-600 transition hover:bg-gray-100" aria-label="Fechar detalhes do projeto">Fechar ×</button>
+              </div>
+              <div className="p-6 md:p-8">
+                <p className="mb-7 max-w-3xl leading-7 text-gray-600">{selectedProject.overview}</p>
+                <div className="space-y-6">
+                  {selectedProject.images.map((image) => (
+                    <figure key={image.src} className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+                      <img src={image.src} alt={image.alt} className="w-full" />
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Contact Section (Glassmorphism) */}
         <section

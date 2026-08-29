@@ -9,4 +9,7 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
+  category: "Power BI" | "Excel";
+  images: { src: string; alt: string }[];
+  overview: string;
 }
