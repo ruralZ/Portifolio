@@ -1,10 +1,8 @@
 import type { Skill } from "../types";
 
-// 2. Dados (Simulando o banco)
 export const skills: Skill[] = [
-    { title: "Excel Avançado", description: "Domínio completo em fórmulas complexas.", items: ["Fórmulas Avançadas", "Tabelas Dinâmicas"] },
-    { title: "Power BI", description: "Criação de dashboards interativos.", items: ["DAX", "Power Query", "Modelagem"] },
-    { title: "PostgreSQL", description: "Design e gerenciamento de bancos relacionais.", items: ["Consultas Otimizadas", "Administração", "Modelagem"] },
-    { title: "Google Sheets", description: "Planilhas colaborativas e automação de dados.", items: ["Fórmulas", "Tabelas Dinâmicas", "Apps Script"] },
-    { title: "Python", description: "Automação e análise de dados.", items: ["Pandas", "Scripts", "Integrações"] }
+  { title: "Dados & BI", description: "Análise e apresentação de informações para apoiar decisões.", items: ["Dashboards", "Análise de dados", "Visualização"] },
+  { title: "Power BI", description: "Criação de relatórios interativos e indicadores.", items: ["DAX", "Power Query", "Dashboards"] },
+  { title: "Planilhas", description: "Organização, tratamento e análise de dados em planilhas.", items: ["Excel", "Google Sheets", "Análises"] },
+  { title: "Programação", description: "Desenvolvimento de soluções e automações.", items: ["C#", "Scripts", "Automação"] },
 ];
