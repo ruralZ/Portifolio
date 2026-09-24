@@ -1,73 +1,111 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📊 Portfólio — Pedro Henrique
 
-Currently, two official plugins are available:
+**Estudante de BI • Análise de Dados & Programação**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 **Acesse o site online:**  
+### 👉 [https://ruralz.github.io/Portifolio/](https://ruralz.github.io/Portifolio/) 👈
 
-## React Compiler
+[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://ruralz.github.io/Portifolio/)
+[![React](https://img.shields.io/badge/React%2019-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+</div>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 Sobre o Projeto
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Este repositório contém o código-fonte do meu **portfólio profissional**, desenvolvido para apresentar meus projetos práticos de Business Intelligence, dashboards analíticos, modelagens em planilhas, scripts de automação e certificações técnicas.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+O site foi construído com foco em performance, design responsivo, acessibilidade e ótima experiência visual para recrutadores, clientes e visitantes.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Funcionalidades
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Apresentação & Sobre**: Visão geral de atuação profissional focada em inteligência de negócios, dados e soluções práticas.
+- **Competências Técnicas**: Cards interativos destacando proficiência em **Power BI**, **Excel**, **PostgreSQL**, **Python** e **Dados & BI**.
+- **Certificados com Visualizador Interativo (Modal/Lightbox)**:
+  - Exibição em alta resolução da **frente** (certificado oficial) e do **verso** (grade curricular com lista detalhada de cursos concluídos).
+  - Links para validação de autenticidade na **Alura** e acesso ao arquivo original em PDF.
+  - Navegação intuitiva entre páginas via teclado (setas `←` / `→`) ou botões na interface.
+- **Galeria de Projetos**:
+  - Filtros por categoria (*Todos*, *Dados & BI*, *Programação*).
+  - Modal imersivo para visualização das telas, dashboards e objetivos de cada projeto.
+- **Contato Direto**: Links integrados para conexão no LinkedIn e GitHub.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🛠️ Tecnologias e Ferramentas do Portfólio
+
+- **Frontend**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Estilização**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Ícones**: [React Icons](https://react-icons.github.io/react-icons/)
+- **Build Tool**: [Vite](https://vite.dev/)
+- **Hospedagem & Deploy**: [GitHub Pages](https://pages.github.com/) via `gh-pages`
+
+---
+
+## 📊 Áreas de Foco & Competências
+
+| Competência | Foco Principal |
+| :--- | :--- |
+| **Power BI** | DAX, Power Query, ETL, Modelagem de dados e Dashboards Analíticos *(Trilha Alura - 37h)* |
+| **Excel** | Fórmulas avançadas, Tabelas Dinâmicas, Gráficos Dinâmicos e Automação com Macros *(Trilha Alura - 50h)* |
+| **PostgreSQL** | Consultas SQL, modelagem relacional, estruturação e análise de dados |
+| **Python** | Análise de dados, automação de rotinas, scripts e pipelines de ETL |
+| **Dados & BI** | Indicadores de desempenho (KPIs), storytelling com dados e visualizações analíticas |
+
+---
+
+## 💻 Como Executar o Projeto Localmente
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
+- Gerenciador de pacotes `npm`
+
+### Passo a passo
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/ruralZ/Portifolio.git
+   ```
+
+2. **Acesse a pasta do projeto:**
+   ```bash
+   cd Portifolio
+   ```
+
+3. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
+
+4. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+   Acesse a URL informada no terminal (normalmente `http://localhost:5173/Portifolio/`).
+
+5. **Para gerar o build de produção:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📬 Contato
+
+- **LinkedIn:** [Pedro Henrique](https://www.linkedin.com/in/pedrozhenrique)
+- **GitHub:** [@ruralZ](https://github.com/ruralZ)
+- **Portfólio Online:** [ruralz.github.io/Portifolio](https://ruralz.github.io/Portifolio/)
+
+---
+
+<div align="center">
+Desenvolvido por <strong>Pedro Henrique</strong> © 2026
+</div>
