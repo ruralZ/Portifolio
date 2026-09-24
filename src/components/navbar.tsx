@@ -1,7 +1,7 @@
 import type React from "react";
 import { useState } from "react";
 
-const navItens = ["Competências", "Projetos", "Contato"];
+const navItens = ["Competências", "Certificados", "Projetos", "Contato"];
 const formatAnchor = (item: string) => `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`;
 
 interface NavbarProps { children: React.ReactNode; }
