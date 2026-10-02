@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaExternalLinkAlt, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 import { Navbar } from "../components/navbar";
 import { ProjectCard } from "../components/projectCard";
 import { SkillCard } from "../components/skillCard";
@@ -124,7 +124,7 @@ export default function Portfolio() {
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-purple-600">Portfólio</p>
             <h2 className="text-3xl font-bold text-gray-900">Projetos em destaque</h2>
             <p className="mt-3 text-gray-600">
-              Uma seleção de dashboards e planilhas desenvolvidos por mim. Clique em um projeto para explorar as telas.
+              Uma seleção de projetos de dados, dashboards e desenvolvimento de software. Clique em um projeto para explorar as telas e detalhes.
             </p>
           </div>
           <div className="mb-10 flex flex-wrap justify-center gap-3" role="group" aria-label="Filtrar projetos">
@@ -164,22 +164,23 @@ export default function Portfolio() {
       {/* Project Modal */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/70 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/75 p-3 sm:p-6 backdrop-blur-sm animate-fade-in"
           role="dialog"
           aria-modal="true"
           aria-labelledby="project-title"
           onMouseDown={() => setSelectedProject(null)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/10"
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-purple-600">
                   {selectedProject.category}
                 </p>
-                <h2 id="project-title" className="text-xl font-bold text-gray-900">
+                <h2 id="project-title" className="text-xl sm:text-2xl font-extrabold text-gray-900">
                   {selectedProject.title}
                 </h2>
               </div>
@@ -192,18 +193,118 @@ export default function Portfolio() {
                 Fechar ×
               </button>
             </div>
-            <div className="p-6 md:p-8">
-              <p className="mb-7 max-w-3xl leading-7 text-gray-600">{selectedProject.overview}</p>
-              <div className="space-y-6">
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+              {/* Action buttons (Live project and repository) */}
+              {(selectedProject.liveUrl || selectedProject.githubUrl) && (
+                <div className="flex flex-wrap items-center gap-3">
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-purple-700"
+                    >
+                      <FaExternalLinkAlt className="text-xs" />
+                      Visitar projeto (aurya.dev.br)
+                    </a>
+                  )}
+                  {selectedProject.githubUrl && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-bold text-gray-700 transition hover:bg-gray-100 hover:text-purple-700"
+                    >
+                      <FaGithub className="text-base" />
+                      Código-fonte
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {/* Overview */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Visão Geral</h3>
+                <p className="max-w-3xl leading-relaxed text-gray-700">{selectedProject.overview}</p>
+              </div>
+
+              {/* Technologies */}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Tecnologias Utilizadas</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-lg bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700 ring-1 ring-purple-200/50"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Features (if present) */}
+              {selectedProject.features && selectedProject.features.length > 0 && (
+                <div className="rounded-xl border border-gray-200/80 bg-slate-50/80 p-5">
+                  <h3 className="mb-3 text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
+                    <FaCheckCircle className="text-purple-600 text-base" />
+                    Principais Funcionalidades
+                  </h3>
+                  <ul className="grid gap-2.5 sm:grid-cols-2 text-sm text-gray-700">
+                    {selectedProject.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-purple-500 shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Role & Transparency note (if present) */}
+              {selectedProject.roleNote && (
+                <div className="rounded-xl border border-purple-200/70 bg-purple-50/60 p-5 text-sm text-purple-950 leading-relaxed">
+                  <h4 className="font-bold flex items-center gap-2 mb-1.5 text-purple-900">
+                    <FaInfoCircle className="text-purple-600 shrink-0" />
+                    Transparência & Papel no Projeto
+                  </h4>
+                  <p>{selectedProject.roleNote}</p>
+                </div>
+              )}
+
+              {/* Image gallery */}
+              <div className="space-y-6 pt-2">
+                <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">
+                  Telas e Visualizações ({selectedProject.images.length})
+                </h3>
                 {selectedProject.images.map((image) => (
                   <figure
                     key={image.src}
-                    className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50"
+                    className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50 shadow-sm"
                   >
-                    <img src={image.src} alt={image.alt} className="w-full" />
+                    <img src={image.src} alt={image.alt} className="w-full" loading="lazy" />
+                    {image.caption && (
+                      <figcaption className="border-t border-gray-100 bg-white px-4 py-2.5 text-xs text-gray-600">
+                        {image.caption}
+                      </figcaption>
+                    )}
                   </figure>
                 ))}
               </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="border-t border-gray-100 bg-gray-50 px-6 py-3 flex justify-between items-center text-xs text-gray-500">
+              <span>{selectedProject.title} • {selectedProject.category}</span>
+              <button
+                type="button"
+                onClick={() => setSelectedProject(null)}
+                className="rounded-lg px-4 py-1.5 font-bold text-gray-600 transition hover:bg-gray-200"
+              >
+                Fechar
+              </button>
             </div>
           </div>
         </div>

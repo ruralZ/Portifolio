@@ -5,13 +5,23 @@ export interface Skill {
   items: string[];
 }
 
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface Project {
   title: string;
   description: string;
   tags: string[];
   category: "Dados & BI" | "Programação";
-  images: { src: string; alt: string }[];
+  images: ProjectImage[];
   overview: string;
+  features?: string[];
+  roleNote?: string;
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 export interface CertificatePage {
